@@ -1,5 +1,5 @@
 {
-  "name": "backend-ecommerce",
+  "name": "backend-nevati-home",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "mongoose",
     "bcrypt"
   ],
-  "author": "Juan Carlos Jiménez Gutiérrez <jcjimenez29@misena.edu.co>",
+  "author": "camilo rodriguez avendaño <kamiro1022@gmail.com>",
   "license": "ISC",
-  "description": "BackEnd: API para un E-Commerce",
+  "description": "BackEnd: API para nevati-home",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.20.0",
