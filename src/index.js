@@ -13,6 +13,7 @@ app.use( express.json() );              // Middleware: Permite manejar JSON en l
 /** EndPoints de nuestro servidor */
 app.use( '/api/products', require( './routes/product.routes' ) );   // Middleware: Activa solicitudes que comienzan con el prefijo /api/products
 app.use( '/api/auth', require( './routes/auth.routes' ) );          // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth
+app.use( '/api/history', require( './routes/history.routes' ) );  
 
 /** Lanzamos el servidor en puerto indicado 
  * http://localhost:3000
