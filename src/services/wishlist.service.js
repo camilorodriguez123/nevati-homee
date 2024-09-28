@@ -7,6 +7,9 @@ const dbInsertWishList = async ( newWishList  ) => {
 const dbGetWishList = async () => {
     return await WishListModel.find().populate(['wishList','userId']);
 }
+const dbGetWishListById = async ( _id ) => {
+    return await WishListModel.findOne({ _id });
+}
 const dbUpdateWishList = async ( id, updatedProduct ) => {
     return await WishListModel.findOneAndUpdate(
         { _id: id },        // Objeto de consulta
@@ -21,6 +24,7 @@ const dbDeleteWishList = async ( id ) => {
 module.exports={
     dbInsertWishList,
     dbGetWishList,
+    dbGetWishListById,
     dbUpdateWishList,
     dbDeleteWishList
 };
