@@ -7,16 +7,25 @@ const ProductSchema = new Schema({
         type: String,       // Define tipo          (regla 1)
         required: true
     },
-    description: String,   /** Equivale a --> description: { type: String } */
+    description: {
+        type: String
+    },   
     price: {                // Nombre de la propiedad
         type: Number,       // Define tipo          (regla 1)
         default: 0,         // Valor por defecto    (regla 2)
         min: 0              // Valor minimo         (regla 3)
     },
+    size: {
+        type: String,
+        required: true
+    },
     quantity: {
         type: Number,
         default: 1,
         min: 1
+    },
+    quality: {
+        type: String
     },
     category: {
         type: String,
