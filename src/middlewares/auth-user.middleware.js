@@ -1,8 +1,7 @@
 const { verifyToken } = require("../helpers/jwt.helper");
 
 function authUser ( req, res, next ) {
-    console.log( 'Hola soy el Middleware de Autenticacion' );
-    
+   
     // Paso 1: Obtener el Token del header
     const token = req.header( 'X-Token' );
 

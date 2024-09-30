@@ -10,12 +10,12 @@ const HistorySchema = new mongoose.Schema({
         ref: 'products'
     }]
 }, {
-    timestamps: true    // Agrega campos de fecha: creacion y actualizacion del documento
+    timestamps: true   
 });
 
 const HistoryModel = mongoose.model(
-    'History',            // Nombre de la coleccion
-    HistorySchema          // Estructura de datos de nuestro modelo
+    'History',            
+    HistorySchema          
 ); 
 
 
