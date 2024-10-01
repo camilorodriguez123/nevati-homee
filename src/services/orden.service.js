@@ -6,10 +6,16 @@ const dbInsertOrder = async ( newWishList  ) => {
     return await OrderModel.create( newWishList );
 }
 const dbGetOrder = async () => {
-    return await OrderModel.find().populate(['user','cart']);
+    return await OrderModel.find().populate(['userId']).populate({
+        path: 'carts', // Poblar el carrito
+        populate: {
+            path: 'products.product', // Ahora poblas los productos dentro del carrito
+            model: 'products' // Asegúrate de que este sea el nombre correcto de tu modelo de productos
+        }
+    });
 }
 const dbGetOrderById = async ( _id ) => {
-    return await OrderModel.findOne({ _id }).populate(['user','cart']);
+    return await OrderModel.findOne({ _id }).populate(['userId','carts']);
 }
 const dbUpdateOrder = async ( id, updatedProduct ) => {
     return await OrderModel.findOneAndUpdate(
@@ -20,7 +26,7 @@ const dbUpdateOrder = async ( id, updatedProduct ) => {
 }
 
 const dbDeleteOrder = async ( id ) => {
-    return await OrderModel.findByIdAndDelete( id ).populate(['user','cart']);
+    return await OrderModel.findByIdAndDelete( id ).populate(['userId','carts']);
 }
 module.exports={
     dbInsertOrder,
