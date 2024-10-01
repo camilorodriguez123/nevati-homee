@@ -5,7 +5,10 @@ const dbCart = async ( newCart ) => {
 }
 
 const dbGetCart = async () => {
-    return await CartModel.find().populate(['products','userId']);
+    return await CartModel.find().populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 const dbGetCartById = async ( _id ) => {
