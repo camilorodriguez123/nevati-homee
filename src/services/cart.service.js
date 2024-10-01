@@ -12,7 +12,10 @@ const dbGetCart = async () => {
 }
 
 const dbGetCartById = async ( _id ) => {
-    return await CartModel.findOne({ _id }).populate(['userId', 'products']);
+    return await CartModel.findOne({ _id }).populate(['userId']).populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 const dbUpdateCart = async ( id, updatedProduct ) => {
@@ -24,7 +27,10 @@ const dbUpdateCart = async ( id, updatedProduct ) => {
 }
 
 const dbDeleteCart = async ( id ) => {
-    return await CartModel.findByIdAndDelete( id ).populate(['userId', 'products']);
+    return await CartModel.findByIdAndDelete( id ).populate(['userId']).populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 module.exports = {
