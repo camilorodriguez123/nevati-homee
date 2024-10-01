@@ -12,18 +12,10 @@ app.use( express.json() );              // Middleware: Permite manejar JSON en l
 
 /** EndPoints de nuestro servidor */
 app.use( '/api/products', require( './routes/product.routes' ) );   // Middleware: Activa solicitudes que comienzan con el prefijo /api/products
-app.use( '/api/auth', require( './routes/auth.routes' ) );          // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth
-<<<<<<< HEAD
+app.use( '/api/auth', require( './routes/auth.routes' ) );          // Middleware: Activa solicitudes que comienzan con el prefijo /api/auth 
 app.use( '/api/wishlist', require( './routes/wishlist.routes' ) ); 
 app.use( '/api/history', require( './routes/history.routes' ) );  
-=======
-
-app.use( '/api/wishlist', require( './routes/wishlist.routes' ) ); 
-
-app.use( '/api/history', require( './routes/history.routes' ) );  
-
->>>>>>> 6c1807bc9dfd2ae7bd3b2c6050b0fbcfb24bd8d5
-/** Lanzamos el servidor en puerto indicado 
+/** Lanzamos el servidor en puergto indicado 
  * http://localhost:3000
 */
 app.listen( PORT, function() {
