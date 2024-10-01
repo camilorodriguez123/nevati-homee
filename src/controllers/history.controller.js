@@ -1,4 +1,4 @@
-const { dbHistory, dbGetHistoryById, dbDeleteHistory }= require('../services/history.service');
+const { dbHistory, dbGetHistory, dbGetHistoryById, dbUpdateHistory, dbDeleteHistory, }= require('../services/history.service');
 
 
 async function createHistory( req, res ) {
@@ -23,6 +23,25 @@ async function createHistory( req, res ) {
             ok: false,
             msg: 'Error al crear un historial'
         })
+    }
+}
+
+async function getHistory( req, res ) {
+
+    try {
+        const data = await dbGetHistory();
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al obtener todos los productos del historial'
+        });
     }
 }
 
@@ -54,6 +73,27 @@ async function getHistoryById( req, res ) {
 
 }
 
+async function updateHistoryPatch( req, res ) {
+    const productId = req.params.id;
+    const inputData = req.body;
+
+    try {
+        const data = await dbUpdateHistory( productId, inputData );
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });    
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al actualizar un historial por ID'
+        })   
+    }
+}
+
 async function deleteHistory( req, res ) {
     const historyId = req.params.id;
 
@@ -80,7 +120,9 @@ async function deleteHistory( req, res ) {
 
 module.exports = {
     createHistory,
+    getHistory,
     getHistoryById,
+    updateHistoryPatch,
     deleteHistory
 }
     
