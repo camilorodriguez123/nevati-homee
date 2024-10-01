@@ -5,11 +5,17 @@ const dbCart = async ( newCart ) => {
 }
 
 const dbGetCart = async () => {
-    return await CartModel.find().populate(['products','userId']);
+    return await CartModel.find().populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 const dbGetCartById = async ( _id ) => {
-    return await CartModel.findOne({ _id }).populate(['userId', 'products']);
+    return await CartModel.findOne({ _id }).populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 const dbUpdateCart = async ( id, updatedProduct ) => {
@@ -21,7 +27,10 @@ const dbUpdateCart = async ( id, updatedProduct ) => {
 }
 
 const dbDeleteCart = async ( id ) => {
-    return await CartModel.findByIdAndDelete( id ).populate(['userId', 'products']);
+    return await CartModel.findByIdAndDelete( id ).populate(['userId']).populate({
+        path: 'products.product', 
+        model: 'products'
+    });
 }
 
 module.exports = {
