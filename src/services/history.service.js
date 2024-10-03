@@ -1,6 +1,11 @@
 const HistoryModel = require("../models/History.model");
 
 const dbHistory = async ( newHistory ) => {
+    const existingHistory = await HistoryModel.findOne({ userId: newHistory.userId, status: 'pending' });
+    
+    if (existingHistory) {
+        return existingHistory;
+    }
     return await HistoryModel.create( newHistory );
 }
 

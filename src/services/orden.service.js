@@ -1,9 +1,13 @@
 const OrderModel = require("../models/orden.model");
 
 
-const dbInsertOrder = async ( newWishList  ) => {
-    console.log(newWishList)
-    return await OrderModel.create( newWishList );
+const dbInsertOrder = async ( newOrder  ) => {
+    const existingOrder = await OrderModel.findOne({ userId: newOrder.userId, status: 'processing' });
+    
+    if (existingOrder) {
+        return existingOrder;
+    }
+    return await OrderModel.create( newOrder );
 }
 const dbGetOrder = async () => {
     return await OrderModel.find().populate(['userId']).populate({
