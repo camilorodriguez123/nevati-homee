@@ -26,11 +26,22 @@ const dbDeleteProduct = async ( id ) => {
     return await ProductModel.findByIdAndDelete( id );
 }
 
+const findProductByName = async (productName) => {
+    // Buscar el producto por nombre
+    const product = await ProductModel.findOne({ name: productName });
+
+    if (!product) {
+        throw new Error('Product not found');
+    }
+
+    return product; // Devuelve el producto encontrado
+};
 
 module.exports = {
     dbGetProducts,
     dbGetProductById,
     dbInsertProduct,
     dbUpdateProduct,
-    dbDeleteProduct
+    dbDeleteProduct,
+    findProductByName
 };

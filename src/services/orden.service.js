@@ -1,9 +1,9 @@
 const OrderModel = require("../models/orden.model");
 
 
-const dbInsertOrder = async ( newWishList  ) => {
-    console.log(newWishList)
-    return await OrderModel.create( newWishList );
+const dbInsertOrder = async ( neworder  ) => {
+    console.log(neworder)
+    return await OrderModel.create( neworder);
 }
 const dbGetOrder = async () => {
     return await OrderModel.find().populate(['userId']).populate({
@@ -15,7 +15,13 @@ const dbGetOrder = async () => {
     });
 }
 const dbGetOrderById = async ( _id ) => {
-    return await OrderModel.findOne({ _id }).populate(['userId','carts']);
+    return await OrderModel.findOne({ _id }).populate(['userId']).populate({
+        path: 'carts', // Poblar el carrito
+        populate: {
+            path: 'products.product', // Ahora poblas los productos dentro del carrito
+            model: 'products' // Asegúrate de que este sea el nombre correcto de tu modelo de productos
+        }
+    });
 }
 const dbUpdateOrder = async ( id, updatedProduct ) => {
     return await OrderModel.findOneAndUpdate(
@@ -26,7 +32,13 @@ const dbUpdateOrder = async ( id, updatedProduct ) => {
 }
 
 const dbDeleteOrder = async ( id ) => {
-    return await OrderModel.findByIdAndDelete( id ).populate(['userId','carts']);
+    return await OrderModel.findByIdAndDelete( id ).populate(['userId']).populate({
+        path: 'carts', // Poblar el carrito
+        populate: {
+            path: 'products.product', // Ahora poblas los productos dentro del carrito
+            model: 'products' // Asegúrate de que este sea el nombre correcto de tu modelo de productos
+        }
+    });
 }
 module.exports={
     dbInsertOrder,
