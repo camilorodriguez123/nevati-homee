@@ -1,4 +1,4 @@
-const { dbCart, dbGetCart, dbGetCartById, dbUpdateCart, dbDeleteCart } = require("../services/cart.service")
+const { dbCart, dbGetCart, dbGetCartById, dbUpdateCart, dbDeleteCart, searchProductsInCarts, findProductInCart } = require("../services/cart.service")
 
 async function createCart( req, res ) {
     const payload = req.authUser;
@@ -115,11 +115,27 @@ async function deleteCart( req, res ) {
     
 }
 
+const getProductFromCart = async (req, res) => {
+    const { userId, productName } = req.params;
+
+    try {
+        const product = await findProductInCart(userId, productName);
+        
+        if (!product) {
+            return res.status(404).json({ message: 'producto no econtrado en el carrito' });
+        }
+
+        return res.status(200).json(product);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 module.exports = { 
     createCart, 
     getCart, 
     getCartById, 
     updateCartPatch, 
-    deleteCart
+    deleteCart,
+    getProductFromCart
 }

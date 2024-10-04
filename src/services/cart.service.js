@@ -1,4 +1,5 @@
 const CartModel = require("../models/Cart.model");
+const ProductModel = require('../models/Product.model');
 
 const dbCart = async ( newCart ) => {
     const existingCart = await CartModel.findOne({ userId: newCart.userId, status: 'pending' });
@@ -37,11 +38,22 @@ const dbDeleteCart = async ( id ) => {
         model: 'products'
     });
 }
+const findProductInCart = async (userId, productName) => {
+    const cart = await CartModel.findOne({ userId }).populate('products.product');
+    
+    if (!cart) {
+        throw new Error('carro no encontrado');
+    }
 
+    const product = cart.products.find(item => item.product.name === productName);
+    
+    return product ? product.product : null; // Devuelve el producto o null si no se encuentra
+};
 module.exports = {
     dbCart,
     dbGetCart,
     dbGetCartById,
     dbUpdateCart,
-    dbDeleteCart
+    dbDeleteCart,
+    findProductInCart
 }

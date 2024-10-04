@@ -1,4 +1,4 @@
-const { dbHistory, dbGetHistory, dbGetHistoryById, dbUpdateHistory, dbDeleteHistory, }= require('../services/history.service');
+const { dbHistory, dbGetHistory, dbGetHistoryById, dbUpdateHistory, dbDeleteHistory, findProductInHistory, }= require('../services/history.service');
 
 
 async function createHistory( req, res ) {
@@ -116,13 +116,28 @@ async function deleteHistory( req, res ) {
     
 }
 
+const getProductFromHistory = async (req, res) => {
+    const { userId, productName } = req.params;
 
+    try {
+        const product = await findProductInHistory(userId, productName);
+        
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found in history' });
+        }
+
+        return res.status(200).json(product);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 module.exports = {
     createHistory,
     getHistory,
     getHistoryById,
     updateHistoryPatch,
-    deleteHistory
+    deleteHistory,
+    getProductFromHistory
 }
     

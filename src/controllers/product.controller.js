@@ -1,5 +1,4 @@
-const ProductModel = require('../models/Product.model');
-const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct, dbUpdateProduct, dbSearchProduct } = require('../services/product.service');
+const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct, dbUpdateProduct, findProductByName } = require('../services/product.service');
 
 
 // Muestra todos los productos registrados
@@ -126,6 +125,17 @@ async function deleteProduct( req, res ) {
     } 
 }
 
+const getProductByName = async (req, res) => {
+    const { productName } = req.params;
+
+    try {
+        const product = await findProductByName(productName);
+
+        return res.status(200).json(product); // Devolvemos el producto encontrado
+    } catch (error) {
+        return res.status(404).json({ message: error.message });
+    }
+};
 
 
 
@@ -135,5 +145,6 @@ module.exports = {
     createProduct,
     updateProductPut,
     updateProductPatch,
-    deleteProduct
+    deleteProduct,
+    getProductByName
 }
