@@ -1,7 +1,7 @@
 const WishListModel = require("../models/WishList.model")
 
 const dbInsertWishList = async ( newWishList  ) => {
-    const existingWishList = await WishListModel.findOne({ userId: newWishList.userId, status: 'processing' });
+    const existingWishList = await WishListModel.findOne({ userId: newWishList.userId});
     
     if (existingWishList) {
         return existingWishList;

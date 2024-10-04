@@ -1,4 +1,5 @@
-const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct, dbUpdateProduct } = require('../services/product.service');
+const ProductModel = require('../models/Product.model');
+const { dbInsertProduct, dbGetProducts, dbGetProductById, dbDeleteProduct, dbUpdateProduct, dbSearchProduct } = require('../services/product.service');
 
 
 // Muestra todos los productos registrados
@@ -122,10 +123,9 @@ async function deleteProduct( req, res ) {
             ok: false,
             msg: 'Error al eliminar un producto por ID'
         })
-    }
-
-    
+    } 
 }
+
 
 
 

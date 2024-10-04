@@ -26,7 +26,6 @@ const dbDeleteProduct = async ( id ) => {
     return await ProductModel.findByIdAndDelete( id );
 }
 
-
 module.exports = {
     dbGetProducts,
     dbGetProductById,
