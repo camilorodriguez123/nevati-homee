@@ -1,4 +1,4 @@
-const { dbCart, dbGetCart, dbGetCartById, dbUpdateCart, dbDeleteCart, searchProductsInCarts, findProductInCart } = require("../services/cart.service")
+const { dbCart, dbGetCart, dbGetCartById, dbUpdateCart, dbDeleteCart,  findProductInCart } = require("../services/cart.service")
 
 async function createCart( req, res ) {
     const payload = req.authUser;

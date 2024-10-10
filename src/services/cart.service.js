@@ -1,5 +1,5 @@
 const CartModel = require("../models/Cart.model");
-const ProductModel = require('../models/Product.model');
+
 
 const dbCart = async ( newCart ) => {
     const existingCart = await CartModel.findOne({ userId: newCart.userId, status: 'pending' });
