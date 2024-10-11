@@ -29,7 +29,8 @@ const ProductSchema = new Schema({
     },
     category: {
         type: String,
-        required: true
+        required: true,
+        default: 'non-category'
     },
     urlImage: {
         type: String

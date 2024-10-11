@@ -4,7 +4,7 @@ const { dbHistory, dbGetHistory, dbGetHistoryById, dbUpdateHistory, dbDeleteHist
 async function createHistory( req, res ) {
     const payload = req.authUser;
     const inputData = req.body;
-    console.log( inputData );      
+     
 
     inputData.userId = payload.id;
 

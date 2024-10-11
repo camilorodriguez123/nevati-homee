@@ -1,10 +1,12 @@
 const mongoose = require( 'mongoose' );
+
+const contactUser = require('../models/Contact.model' );
+
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    /** username: [ ] # identificacion, [ ] alias, [x] correo electronico */
     lastname: {
         type: String,
         required: true
@@ -12,10 +14,13 @@ const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true ,
-        ref : 'email'
-    },
+        unique: true
+    }, 
     password: {
+        type: String,
+        required: true
+    },
+    username: {
         type: String,
         required: true
     },
@@ -24,11 +29,10 @@ const UserSchema = new mongoose.Schema({
         required: true
 
     },
-    phone: {
-        type: Number,
+    password: {
+        type: String,
         required: true
     },
-  
     role: {
         type: String,
         default: 'registered'

@@ -2,6 +2,11 @@ const HistoryModel = require("../models/History.model");
 const ProductModel = require("../models/Product.model");
 
 const dbHistory = async ( newHistory ) => {
+    const existingHistory = await HistoryModel.findOne({ userId: newHistory.userId });
+    
+    if (existingHistory) {
+        return existingHistory;
+    }
     return await HistoryModel.create( newHistory );
 }
 

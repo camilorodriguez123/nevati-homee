@@ -1,7 +1,12 @@
 const CartModel = require("../models/Cart.model");
-const ProductModel = require('../models/Product.model');
+
 
 const dbCart = async ( newCart ) => {
+    const existingCart = await CartModel.findOne({ userId: newCart.userId, status: 'pending' });
+    
+    if (existingCart) {
+        return existingCart;
+    }
     return await CartModel.create( newCart );
 }
 
@@ -19,10 +24,10 @@ const dbGetCartById = async ( _id ) => {
     });
 }
 
-const dbUpdateCart = async ( id, updatedProduct ) => {
+const dbUpdateCart = async ( id, updatedCart ) => {
     return await CartModel.findOneAndUpdate(
         { _id: id },        
-        updatedProduct,    
+        updatedCart,    
         { new: true }       
     );
 }

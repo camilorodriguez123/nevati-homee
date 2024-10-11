@@ -2,6 +2,11 @@ const WishListModel = require("../models/WishList.model");
 const ProductModel = require('../models/Product.model');
 
 const dbInsertWishList = async ( newWishList  ) => {
+    const existingWishList = await WishListModel.findOne({ userId: newWishList.userId});
+    
+    if (existingWishList) {
+        return existingWishList;
+    }
     return await WishListModel.create( newWishList );
 }
 const dbGetWishList = async () => {

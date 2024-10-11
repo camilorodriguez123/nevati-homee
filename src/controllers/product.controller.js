@@ -123,9 +123,7 @@ async function deleteProduct( req, res ) {
             ok: false,
             msg: 'Error al eliminar un producto por ID'
         })
-    }
-
-    
+    } 
 }
 
 const getProductByName = async (req, res) => {
@@ -169,6 +167,8 @@ const getCategory = async (req, res) => {
         res.status(500).send('Error al obtener productos.');
     }
 };
+
+
 
 module.exports = {
     getProducts,
