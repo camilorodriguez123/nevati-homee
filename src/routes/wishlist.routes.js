@@ -10,5 +10,5 @@ router.get( '/:id', getWishListById);
 router.patch( '/:id', authUser,authUser,updateWishListPatch);    // Actualiza parcialmente los campos de un producto
 router.delete( '/:id', authUser, authUser,deleteWishList );       // elimina la lista de deseos 
 // Router para búsqueda en la lista de deseos
-router.post('/wishlist/search', getProductInWishListByName);
+router.post('/wishlist/search',authUser, getProductInWishListByName);
 module.exports = router;
