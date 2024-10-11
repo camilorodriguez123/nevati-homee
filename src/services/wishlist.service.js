@@ -27,8 +27,26 @@ const dbDeleteWishList = async ( id ) => {
     return await WishListModel.findByIdAndDelete( id );
 }
 
-const findProductInWishList = async (searchParams) => {
+const searchProductsInWishList = async (userId, { name, description }) => {
+    // Buscar la lista de deseos del usuario
+    const wishList = await WishListModel.findOne({ userId }).populate('wishList');
 
+    if (!wishList || wishList.wishList.length === 0) {
+        throw new Error('No tienes productos en tu lista de deseos');
+    }
+
+    // Filtrar productos por nombre o descripción
+    let filteredProducts = wishList.wishList;
+
+    if (name) {
+        filteredProducts = filteredProducts.filter(product => product.name.match(new RegExp(name, 'i')));
+    }
+
+    if (description) {
+        filteredProducts = filteredProducts.filter(product => product.description.match(new RegExp(description, 'i')));
+    }
+
+    return filteredProducts;
 };
 
 module.exports={
@@ -37,5 +55,5 @@ module.exports={
     dbGetWishListById,
     dbUpdateWishList,
     dbDeleteWishList,
-    findProductInWishList
+    searchProductsInWishList
 };

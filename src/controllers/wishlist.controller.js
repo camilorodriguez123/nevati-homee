@@ -1,4 +1,4 @@
-const { dbInsertWishList, dbGetWishList, dbUpdateWishList, dbDeleteWishList, dbGetWishListById, findProductInWishList } = require('../services/wishlist.service');
+const { dbInsertWishList, dbGetWishList, dbUpdateWishList, dbDeleteWishList, dbGetWishListById, findProductInWishList, searchProductsInWishList } = require('../services/wishlist.service');
 
 
 async function insertWishList( req, res ) {
@@ -115,8 +115,31 @@ async function deleteWishList( req, res ) {
 
     
 }
-const getProductFromWishList = async (req, res) => {
 
+const getProductInWishListByName = async (req, res) => {
+    const { userId, name, description } = req.body;
+
+    try {
+        const products = await searchProductsInWishList(userId, { name, description });
+
+        if (products.length === 0) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No se encontraron productos en tu lista de deseos que coincidan con los criterios de búsqueda.'
+            });
+        }
+
+        return res.status(200).json({
+            ok: true,
+            data: products
+        });
+    } catch (error) {
+        console.error('Error en la búsqueda de productos en la lista de deseos:', error);
+        return res.status(500).json({
+            ok: false,
+            msg: error.message || 'Error al buscar productos en la lista de deseos'
+        });
+    }
 };
 
 module.exports = {
@@ -125,5 +148,5 @@ module.exports = {
     getWishListById,
     updateWishListPatch,
     deleteWishList,
-    getProductFromWishList
+    getProductInWishListByName
 };
