@@ -12,10 +12,21 @@ const dbRegisterUser = async ( newUser ) => {
 
     const dbUser = new UserModel(newUser);
 
+    // Encriptar la contraseña
     const hashPassword = encryptedPassword(dbUser.password);
     dbUser.password = hashPassword;
 
-    return await dbUser.save();
+    // Guardar el usuario en la base de datos
+    const savedUser = await dbUser.save();
+
+    // Eliminar la propiedad password antes de devolver el objeto
+    const userWithoutPassword = savedUser.toObject();
+    delete userWithoutPassword.password;
+    delete userWithoutPassword.createdAt;
+    delete userWithoutPassword.updatedAt;
+    delete userWithoutPassword.__v;
+
+    return userWithoutPassword;
 }
 
 
