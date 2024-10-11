@@ -38,14 +38,38 @@ const dbDeleteCart = async ( id ) => {
         model: 'products'
     });
 }
-const findProductInCart = async (searchParams) => {
-    
+
+const searchProductsInCart = async (userId, { name, description }) => {
+    // Buscar el carrito del usuario
+    const cart = await CartModel.findOne({ userId }).populate('products.product');
+
+    if (!cart || cart.products.length === 0) {
+        throw new Error('No tienes productos en tu carrito');
+    }
+
+    // Filtrar productos por nombre o descripción
+    let filteredProducts = cart.products;
+
+    if (name) {
+        filteredProducts = filteredProducts.filter(item => 
+            item.product.name.match(new RegExp(name, 'i'))
+        );
+    }
+
+    if (description) {
+        filteredProducts = filteredProducts.filter(item => 
+            item.product.description.match(new RegExp(description, 'i'))
+        );
+    }
+
+    return filteredProducts;
 };
+
 module.exports = {
     dbCart,
     dbGetCart,
     dbGetCartById,
     dbUpdateCart,
     dbDeleteCart,
-    findProductInCart
+    searchProductsInCart
 }
