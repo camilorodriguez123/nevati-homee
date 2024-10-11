@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const router = express.Router();
 
-const { getProducts, createProduct, updateProductPut, updateProductPatch, deleteProduct, getProductById, getProductByName } = require('../controllers/product.controller');
+const { getProducts, createProduct, updateProductPatch, deleteProduct, getProductById, getProductByName, getCategory } = require('../controllers/product.controller');
 const { authUser, greeting } = require('../middlewares/auth-user.middleware');
 
 /** Definir las rutas para la entidad producto
@@ -17,6 +17,8 @@ router.get( '/:id',authUser, getProductById );                   // Obtiene un p
 router.patch( '/:id', authUser, updateProductPatch );    // Actualiza parcialmente los campos de un producto
 router.delete( '/:id', authUser, deleteProduct );        // Elimina un producto
 
-router.get('/products/:productName', getProductByName);
+router.post('/search', getProductByName);  // Cambié la ruta para usar POST
+
+router.get('/category/:categoryName', getCategory);
 
 module.exports = router;

@@ -2,17 +2,25 @@ const { verifyEncriptedPassword } = require("../helpers/bcrypt.helper");
 const UserModel = require("../models/User.model");
 const { dbGetUserByUsername, dbRegisterUser } = require("../services/auth.service");
 
-const { generateToken, verifyToken } = require( '../helpers/jwt.helper' );
+const { generateToken} = require( '../helpers/jwt.helper' );
 
 async function register( req, res ) {
     // Paso 1: Obtener los datos a registrar (usuario)
     const inputData = req.body;
 
+    // Validar que el 'username' (email) sea válido
+    if (!inputData.username || !inputData.username.includes('@')) {
+        return res.json({
+            ok: false,
+            msg: 'El correo electrónico proporcionado no es válido.'
+        });
+    }
+
     try {
         // Paso 2: Verificar si el usuario existe BD  ---> email
-        const userFound = await dbGetUserByUsername( inputData.username );
+        const userFound = await dbGetUserByUsername(inputData.username);
 
-        if( userFound ) {
+        if (userFound) {
             return res.json({
                 ok: false,
                 msg: 'El usuario ya existe.'
@@ -20,9 +28,9 @@ async function register( req, res ) {
         }
 
         // Paso 3: Registrar usuario (No existe)
-        const data =  await dbRegisterUser( inputData );
-        console.log( data );   
-        
+        const data = await dbRegisterUser(inputData);
+        console.log(data);
+
         // Paso Opcional: Generar las credenciales (Token) y esto autenticara al usuario
 
         // Paso 4: Responder al cliente, si el usuario a sido registrado
@@ -30,9 +38,8 @@ async function register( req, res ) {
             ok: true,
             data
         });
-    } 
-    catch ( error ) {
-        console.error( error );
+    } catch (error) {
+        console.error(error);
         res.json({
             ok: false,
             msg: 'Error al registrar usuario'

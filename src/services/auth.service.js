@@ -6,14 +6,16 @@ const dbGetUserByUsername = async ( email ) => {
 }
 
 const dbRegisterUser = async ( newUser ) => {
-    const dbUser = new UserModel( newUser );  // Prepara los datos en JSON para registrar en MongoDB 
+    if (!newUser.username || newUser.username === '') {
+        throw new Error('El email (username) no puede estar vacío');
+    }
 
-    const hashPassword = encryptedPassword( dbUser.password );
-    // console.log( hashPassword );
+    const dbUser = new UserModel(newUser);
 
-    dbUser.password = hashPassword;     // Reescribiendo el password original por el encriptado
+    const hashPassword = encryptedPassword(dbUser.password);
+    dbUser.password = hashPassword;
 
-    return await dbUser.save();   // Guarda en la base de datos y devuelve el usuario registrado
+    return await dbUser.save();
 }
 
 

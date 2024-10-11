@@ -1,7 +1,4 @@
 const mongoose = require( 'mongoose' );
-
-const contactUser = require('../models/Contact.model' );
-
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -12,16 +9,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    username: {
         type: String,
         required: true,
-        unique: true
-    }, 
-    password: {
-        type: String,
-        required: true
+        unique: true ,
+        ref : 'email'
     },
-    username: {
+    password: {
         type: String,
         required: true
     },

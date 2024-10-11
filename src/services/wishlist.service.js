@@ -2,11 +2,10 @@ const WishListModel = require("../models/WishList.model");
 const ProductModel = require('../models/Product.model');
 
 const dbInsertWishList = async ( newWishList  ) => {
-    console.log(newWishList)
     return await WishListModel.create( newWishList );
 }
 const dbGetWishList = async () => {
-    return await WishListModel.find().populate(['wishList','userId']);
+    return await WishListModel.find().populate('userId').populate('wishList');
 }
 const dbGetWishListById = async ( _id ) => {
     return await WishListModel.findOne({ _id });
@@ -22,16 +21,9 @@ const dbUpdateWishList = async ( id, updatedProduct ) => {
 const dbDeleteWishList = async ( id ) => {
     return await WishListModel.findByIdAndDelete( id );
 }
-const findProductInWishList = async (userId, productName) => {
-    const wishList = await WishListModel.findOne({ userId }).populate('wishList');
 
-    if (!wishList) {
-        throw new Error('Wish list not found');
-    }
+const findProductInWishList = async (searchParams) => {
 
-    const product = wishList.wishList.find(item => item.name === productName);
-    
-    return product || null; // Devuelve el producto o null si no se encuentra
 };
 
 module.exports={

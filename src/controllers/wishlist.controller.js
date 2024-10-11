@@ -116,20 +116,9 @@ async function deleteWishList( req, res ) {
     
 }
 const getProductFromWishList = async (req, res) => {
-    const { userId, productName } = req.params;
 
-    try {
-        const product = await findProductInWishList(userId, productName);
-        
-        if (!product) {
-            return res.status(404).json({ message: 'Product not found in wish list' });
-        }
-
-        return res.status(200).json(product);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
 };
+
 module.exports = {
     insertWishList,
     GetWishList,

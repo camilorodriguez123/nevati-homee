@@ -33,16 +33,8 @@ const dbDeleteCart = async ( id ) => {
         model: 'products'
     });
 }
-const findProductInCart = async (userId, productName) => {
-    const cart = await CartModel.findOne({ userId }).populate('products.product');
+const findProductInCart = async (searchParams) => {
     
-    if (!cart) {
-        throw new Error('carro no encontrado');
-    }
-
-    const product = cart.products.find(item => item.product.name === productName);
-    
-    return product ? product.product : null; // Devuelve el producto o null si no se encuentra
 };
 module.exports = {
     dbCart,
