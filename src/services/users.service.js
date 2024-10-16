@@ -1,7 +1,6 @@
 /** El Archivo de Servicio tiene la responsabilidad unica de hacer consultas a la base de datos */
 const UserModel = require("../models/User.model");
 const { encryptedPassword } = require("../helpers/bcrypt.helper");
-const { dbDeleteProduct } = require("./product.service");
 
 const dbGetUser = async () => {
     return await ProductModel.find().populate('userId');
