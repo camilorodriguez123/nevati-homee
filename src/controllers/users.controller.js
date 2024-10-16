@@ -17,7 +17,7 @@ async function getUser( req, res ) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al obtener todos los productos'
+            msg: 'Error al obtener todos los usuarios'
         });
     }
 }
@@ -32,7 +32,7 @@ async function getUserById( req, res ) {
         if( ! data ) {
             res.status( 404 ).json({
                 ok: false,
-                msg: 'Producto no encontrado'
+                msg: 'usuario no encontrado'
             });
         } 
 
@@ -45,7 +45,7 @@ async function getUserById( req, res ) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al obtener un producto por ID'
+            msg: 'Error al obtener un usuario por ID'
         })  
     }
 
@@ -71,7 +71,7 @@ async function createUser( req, res ) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al crear un producto'
+            msg: 'Error al crear un usuario'
         })
     }
 
@@ -80,7 +80,7 @@ async function createUser( req, res ) {
 function updateUserPut( req, res ) {
     res.json({
         ok: true,
-        msg: 'Actualiza todos los campos del producto'
+        msg: 'Actualiza todos los campos del usuario'
     });
 }
 
@@ -100,7 +100,7 @@ async function updateUserPatch( req, res ) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al actualizar un producto por ID'
+            msg: 'Error al actualizar un usuario por ID'
         })   
     }
 }
@@ -121,7 +121,7 @@ async function deleteUser( req, res ) {
         console.error( error );
         res.status( 500 ).json({
             ok: false,
-            msg: 'Error al eliminar un producto por ID'
+            msg: 'Error al eliminar un usuario por ID'
         })
     } 
 }
