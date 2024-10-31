@@ -11,5 +11,5 @@ router.get( '/:id',authUser, getCartById );
 router.patch( '/:id', authUser, updateCartPatch);
 router.delete( '/:id', authUser, deleteCart );                               
 // Router para búsqueda en el carrito de compras
-router.post('/search', getProductInCartByName);
+router.post('/search',authUser, getProductInCartByName);
 module.exports = router;

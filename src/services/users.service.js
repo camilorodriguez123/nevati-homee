@@ -3,14 +3,14 @@ const UserModel = require("../models/User.model");
 const { encryptedPassword } = require("../helpers/bcrypt.helper");
 
 const dbGetUser = async () => {
-    return await ProductModel.find().populate('userId');
+    return await UserModel.find();
 }
 
 const dbGetUserById = async ( _id ) => {
-    return await ProductModel.findOne({ _id });
+    return await UserModel.findOne({ _id });
 }
 
-const dbInsertUser = async ( newProduct ) => {
+const dbInsertUser = async ( newUser ) => {
     if (!newUser.username || newUser.username === '') {
         throw new Error('El email (username) no puede estar vacío');
     }
@@ -34,16 +34,16 @@ const dbInsertUser = async ( newProduct ) => {
     return userWithoutPassword;
 }
 
-const dbUpdateUser = async ( id, updatedProduct ) => {
-    return await ProductModel.findOneAndUpdate(
+const dbUpdateUser = async ( id, updatedusers ) => {
+    return await UserModel.findOneAndUpdate(
         { _id: id },        // Objeto de consulta
-        updatedProduct,     // Objeto con las propiedades y valores a actualizar
+        updatedusers,       // Objeto con las propiedades y valores a actualizar
         { new: true }       // Configurando la salida de la consulta
     );
 }
 
 const dbDeleteUser = async ( id ) => {
-    return await ProductModel.findByIdAndDelete( id );
+    return await UserModel.findByIdAndDelete( id );
 }
 module.exports = {
     dbGetUser,

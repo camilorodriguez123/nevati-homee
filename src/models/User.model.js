@@ -1,6 +1,7 @@
 const mongoose = require( 'mongoose' );
 
 const contactUser = require('../models/Contact.model' );
+const { type } = require('express/lib/response');
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -20,16 +21,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    username: {
-        type: String,
+    phone:{
+        type:Number,
         required: true
     },
     address: {
-        type: String,
-        required: true
-
-    },
-    password: {
         type: String,
         required: true
     },
