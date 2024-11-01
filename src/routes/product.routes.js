@@ -12,7 +12,7 @@ const { authRole } = require('../middlewares/auth-role.middleware');
 router.post( '/', authUser, authRole , createProduct  );           // Crear un producto
 
 router.get( '/', getProducts );                         // Obtiene todos los productos
-router.get( '/:id',authUser, authRole , getProductById );                   // Obtiene un producto por su ID                            
+router.get( '/:id', getProductById );                   // Obtiene un producto por su ID                            
 // router.put( '/', authUser, updateProductPut );        // Actualiza todos los campos de un producto
 router.patch( '/:id',  authUser,authRole, updateProductPatch );    // Actualiza parcialmente los campos de un producto
 router.delete( '/:id',  authUser, authRole,deleteProduct );        // Elimina un producto
