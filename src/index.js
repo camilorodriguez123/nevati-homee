@@ -5,10 +5,13 @@ const app = express();
 const PORT = process.env.PORT;
 
 const dbConection = require( './config/mongo.config' );
+const { createUser } = require('./controllers/users.controller');
+const { createDefaultUsers } = require('./config/register-default');
 
 /** Establecer la conexion a MongoDB usando la configuracion */
 dbConection();
 
+createDefaultUsers();
 /** MIDDLEWARE: */
 app.use(cors());
 app.use( express.json() );              // Middleware: Permite manejar JSON en las solicitudes
@@ -25,5 +28,5 @@ app.use( '/api/users', require( './routes/users.routes' ) );
  * http://localhost:3000
 */
 app.listen( PORT, function() {
-    console.log( 'Servidor corriendo en puerto 3000' );
+    console.log( 'Servidor corriendo en puerto 4000' );
 });

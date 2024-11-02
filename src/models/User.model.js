@@ -1,8 +1,5 @@
 const mongoose = require( 'mongoose' );
 
-const contactUser = require('../models/Contact.model' );
-const { type } = require('express/lib/response');
-
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
