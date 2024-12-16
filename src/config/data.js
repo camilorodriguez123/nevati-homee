@@ -1,21 +1,12 @@
 const users = [
     {
-        name: 'Admin',
-        lastname: 'User',
-        username: 'admin',
-        password: 'admin123', // La encriptaremos antes de guardarla
-        phone: 1234567890,
-        address: 'Admin Address',
+        name: 'camilo',
+        lastname: 'rodriguez avendaño',
+        username: 'kamiro1022@gmail.com',
+        password: '12345678', // La encriptaremos antes de guardarla
+        phone: 3227062162,
+        address: 'calle 89 # 92 - 11',
         role: 'admin'
-    },
-    {
-        name: 'Guest',
-        lastname: 'User',
-        username: 'guest',
-        password: 'guest123', // También la encriptaremos
-        phone: 9876543210,
-        address: 'Guest Address',
-        role: 'guest'
     }
 ];
 
